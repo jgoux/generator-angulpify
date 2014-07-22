@@ -1,0 +1,7 @@
+{
+    "name": "<%= appname %>",
+    "private": "true",
+    "dependencies": {
+        "angular": "~1.2.20"
+    }
+}
