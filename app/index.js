@@ -1,8 +1,6 @@
 'use strict';
-//var fs = require('fs');
+
 var util = require('util');
-//var path = require('path');
-//var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
