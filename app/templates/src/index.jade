@@ -8,5 +8,5 @@ html(ng-app='<%= appname %>')
         link(href=styles, rel='stylesheet')
 
     body
-        //-Content goes here
+        div(<% if (includeUIRouter) { %>ui-view=''<% } else { %>ng-view=''<% } %>)
         script(src=scripts)

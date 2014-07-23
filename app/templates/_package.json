@@ -30,7 +30,10 @@
       "yargs": "^1.2.2"
   },
     "browser": {
-        "angular": "./bower_components/angular/angular.min.js"
+        "angular": "./bower_components/angular/angular.min.js"<% if (includeUIBootstrap) { %>,
+        "angular-ui-bootstrap": "./bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"<% } if (includeUIRouter) { %>,
+        "angular-ui-router": "./bower_components/angular-ui-router/release/angular-ui-router.min.js"<% } else { %>,
+        "angular-route": "./bower_components/angular-route/angular-route.min.js"<% } %>
     },
     "browserify-shim": {}
 }
