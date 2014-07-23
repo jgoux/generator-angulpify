@@ -1,13 +1,9 @@
 <% if (includeBootstrap) { %>@import "variables";
 @import "imports";<% } %>
 
-@import url(//fonts.googleapis.com/css?family=Lato:700);
-
 body {
-  margin:0;
-  font-family:'Lato', sans-serif;
-  text-align:center;
-  color: #222;
+ text-align:center;
+ color: #222;
 }
 
 .welcome {
@@ -23,10 +19,4 @@ body {
 a, a:visited {
   text-decoration:none;
 }
-
-h1 {
-  font-size: 32px;
-  margin: 16px 0 0 0;
-}
-
 
