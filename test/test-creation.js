@@ -1,5 +1,6 @@
 /*global describe, beforeEach, it */
 'use strict';
+
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 
@@ -10,25 +11,36 @@ describe('angulpify generator', function () {
         return done(err);
       }
 
-      this.app = helpers.createGenerator('angulpify:app', [
-        '../../app'
+      this.angulpify = helpers.createGenerator('angulpify:app', [
+        '../../app', [
+          helpers.createDummyGenerator(),
+          'mocha:app'
+        ]
       ]);
+      this.angulpify.options['skip-install'] = true;
+
       done();
     }.bind(this));
   });
 
+  it('the generator can be required without throwing', function () {
+    // not testing the actual run of generators yet
+    this.app = require('../app');
+  });
+
   it('creates expected files', function (done) {
     var expected = [
-      // add files you expect to exist here.
-      '.jshintrc',
-      '.editorconfig'
+      'bower.json',
+      'package.json',
+      'gulpfile.js'
     ];
 
-    helpers.mockPrompt(this.app, {
-      'someOption': true
+    helpers.mockPrompt(this.angulpify, {
+      projectName: 'foo bar',
+      features: ['includeUIRouter']
     });
-    this.app.options['skip-install'] = true;
-    this.app.run({}, function () {
+
+    this.angulpify.run({}, function () {
       helpers.assertFile(expected);
       done();
     });
