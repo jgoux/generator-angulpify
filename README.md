@@ -26,7 +26,7 @@ This project is still in early stage of development, so use with caution. API br
 
 ## Tooling
 
-This generator rely on several technologies, make sure your system has:
+This generator relies on several technologies, make sure your system has:
 - [Node.js](http://nodejs.org)
 - [Yeoman](http://yeoman.io/learning/index.html)
 - [Bower](http://bower.io/#install-bower)
