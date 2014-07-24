@@ -14,13 +14,18 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --reporter spec"
   },
   "files": [
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "angularjs",
+    "gulp",
+    "browserify",
+    "web",
+    "front-end"
   ],
   "dependencies": {
     "yeoman-generator": "~0.16.0",

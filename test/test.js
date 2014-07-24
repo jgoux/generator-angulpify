@@ -24,7 +24,6 @@ describe('angulpify generator', function () {
   });
 
   it('the generator can be required without throwing', function () {
-    // not testing the actual run of generators yet
     this.app = require('../app');
   });
 
