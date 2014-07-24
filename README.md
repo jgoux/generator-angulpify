@@ -1,47 +1,79 @@
-# generator-angulpify [![Build Status](https://secure.travis-ci.org/jgoux/generator-angulpify.png?branch=master)](https://travis-ci.org/jgoux/generator-angulpify)
+# Angulpify generator [![Build Status](https://secure.travis-ci.org/jgoux/generator-angulpify.svg?branch=master)](http://travis-ci.org/jgoux/generator-angulpify)
 
-> [Yeoman](http://yeoman.io) generator
+> [Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app using [angularjs](https://angularjs.org/), [gulp](http://gulpjs.com/) and [browserify](http://browserify.org/)
+
+![](http://i.imgur.com/ucUfQQz.png)
+
+
+### Notice
+
+This project is still in early stage of development, so use with caution. API breaking changes at this stage are quite likely.
+
+
+## Features
+
+* Require() everywhere to build a modular application
+* CSS Autoprefixing
+* Built-in preview server with livereload
+* Automagically compile Sass
+* Automagically compile your Jade templates into $templateCache
+* Automagically lint your scripts
+* Awesome image optimization
+* Wire-up [Bower](http://bower.io) dependencies easily with browserify-shim
+* Bundle your application for two environments (build/release)
+
+*For more information on what this generator can do for you, take a look at the [gulp plugins](app/templates/_package.json).*
+
+## Tooling
+
+This generator rely on several technologies, make sure your system has:
+- [Node.js](http://nodejs.org)
+- [Yeoman](http://yeoman.io/learning/index.html)
+- [Bower](http://bower.io/#install-bower)
+- [Gulp](http://gulpjs.com)
+- [Ruby](https://www.ruby-lang.org/en/installation/)
+- [Sass](http://sass-lang.com/install)
 
 
 ## Getting Started
 
-### What is Yeoman?
+- Install: `npm install -g generator-angulpify`
+- Run: `yo angulpify`
+- Run `gulp` for building to the `build` directory and `gulp --release` for building to the `release` directory
 
-Trick question. It's not a thing. It's this guy:
 
-![](http://i.imgur.com/JHaAlBJ.png)
+#### Third-Party Dependencies
 
-Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
+*(HTML/CSS/JS/Images/etc)*
 
-Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
+To install dependencies, run `bower install --save package-name` to get the files, then add an entry into the `[browser](app/templates/_package.json#L32)` key of your `package.json`.
 
-```bash
-$ npm install -g yo
-```
 
-### Yeoman Generators
+## Docs
 
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
+More to come.
 
-To install generator-angulpify from npm, run:
 
-```bash
-$ npm install -g generator-angulpify
-```
+## Options
 
-Finally, initiate the generator:
+- `--skip-install`
+  Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
 
-```bash
-$ yo angulpify
-```
+- `--test-framework=<framework>`
+  Defaults to `mocha`. Can be switched for another supported testing framework like `jasmine`.
 
-### Getting To Know Yeoman
 
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
+## Contribute
 
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
+PRs are welcome!
+
+
+## Special Thanks
+
+This generator is inspired by the [Web app generator](https://github.com/yeoman/generator-gulp-webapp) and by [Ben Clinkinbeard](@bclinkinbeard)'s [presentation](http://benclinkinbeard.com/talks/2014/ng-conf/).
+Thanks to all the contributors!
 
 
 ## License
 
-MIT
+[MIT](https://tldrlegal.com/license/mit-license)
