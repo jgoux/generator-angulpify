@@ -19,7 +19,7 @@ This project is still in early stage of development, so use with caution. API br
 * Automagically compile your Jade templates into $templateCache
 * Automagically lint your scripts
 * Awesome image optimization
-* Wire-up [Bower](http://bower.io) dependencies easily with browserify-shim
+* Wire-up Bower dependencies easily with browserify-shim
 * Bundle your application for two environments (build/release)
 
 *For more information on what this generator can do for you, take a look at the [gulp plugins](app/templates/_package.json).*
@@ -46,7 +46,7 @@ This generator rely on several technologies, make sure your system has:
 
 *(HTML/CSS/JS/Images/etc)*
 
-To install dependencies, run `bower install --save package-name` to get the files, then add an entry into the `[browser](app/templates/_package.json#L32)` key of your `package.json`.
+To install dependencies, run `bower install --save package-name` to get the files, then add an entry into the [browser](app/templates/_package.json#L32) key of your `package.json`.
 
 
 ## Docs
