@@ -1,9 +1,22 @@
-<% if (includeBootstrap) { %>@import "variables";
-@import "imports";<% } %>
+<
+% if
 
+(
+includeBootstrap
+
+)
+{
+%>
+
+  @import "variables";
+  @import "imports";
+<
+%
+}
+%>
 body {
- text-align:center;
- color: #222;
+  text-align: center;
+  color: #222;
 }
 
 .welcome {
@@ -17,6 +30,6 @@ body {
 }
 
 a, a:visited {
-  text-decoration:none;
+  text-decoration: none;
 }
 

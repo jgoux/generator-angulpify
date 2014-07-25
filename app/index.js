@@ -40,29 +40,36 @@ AngulpifyGenerator.prototype.askFor = function askFor() {
     this.log(chalk.magenta('Out of the box I include AngularJS, Gulp tasks and Browserify to build your app.'));
   }
 
-  var prompts = [{
+  var prompts = [
+    {
       type: 'input',
       name: 'projectName',
       message: 'What\'s your project name?',
       default: this.appname
-    }, {
+    },
+    {
       type: 'checkbox',
       name: 'features',
       message: 'What more would you like?',
-      choices: [{
-        name: 'Bootstrap',
-        value: 'includeBootstrap',
-        checked: true
-      }, {
-        name: 'UI Bootstrap',
-        value: 'includeUIBootstrap',
-        checked: true
-      }, {
-        name: 'UI Router',
-        value: 'includeUIRouter',
-        checked: true
-      }]
-    }];
+      choices: [
+        {
+          name: 'Bootstrap',
+          value: 'includeBootstrap',
+          checked: true
+        },
+        {
+          name: 'UI Bootstrap',
+          value: 'includeUIBootstrap',
+          checked: true
+        },
+        {
+          name: 'UI Router',
+          value: 'includeUIRouter',
+          checked: true
+        }
+      ]
+    }
+  ];
 
   this.prompt(prompts, function (answers) {
     var features = answers.features;
