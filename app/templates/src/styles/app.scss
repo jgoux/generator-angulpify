@@ -1,19 +1,5 @@
-<
-% if
-
-(
-includeBootstrap
-
-)
-{
-%>
-
-  @import "variables";
-  @import "imports";
-<
-%
-}
-%>
+<% if (includeBootstrap) { %>@import "variables";
+@import "imports";<% } %>
 body {
   text-align: center;
   color: #222;
