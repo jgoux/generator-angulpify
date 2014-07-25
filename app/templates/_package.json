@@ -4,7 +4,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "postinstall": "npm install browserify gulp-header"
+    "postinstall": "npm install browserify@4.2.3 gulp-header"
   },
   "devDependencies": {
     "browserify-shim": "^3.6.0",
