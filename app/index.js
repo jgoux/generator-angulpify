@@ -26,8 +26,6 @@ var AngulpifyGenerator = module.exports = function AngulpifyGenerator(args, opti
   });
 
   this.options = options;
-
-  this.options = options;
 };
 
 util.inherits(AngulpifyGenerator, yeoman.generators.Base);
