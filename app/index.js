@@ -14,17 +14,6 @@ var AngulpifyGenerator = module.exports = function AngulpifyGenerator(args, opti
   // for hooks to resolve on mocha by default
   options['test-framework'] = this.testFramework;
 
-  // resolved to mocha by default (could be switched to jasmine for instance)
-  this.hookFor('test-framework', {
-    as: 'app',
-    options: {
-      options: {
-        'skip-install': options['skip-install-message'],
-        'skip-message': options['skip-install']
-      }
-    }
-  });
-
   this.options = options;
 };
 
