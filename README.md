@@ -70,7 +70,7 @@ PRs are welcome!
 
 ## Special Thanks
 
-This generator is inspired by the [Web app generator](https://github.com/yeoman/generator-gulp-webapp) and by [Ben Clinkinbeard](@bclinkinbeard)'s [presentation](http://benclinkinbeard.com/talks/2014/ng-conf/).
+This generator is inspired by the [Web app generator](https://github.com/yeoman/generator-gulp-webapp) and by [Ben Clinkinbeard](http://twitter.com/bclinkinbeard)'s [presentation](http://benclinkinbeard.com/talks/2014/ng-conf/).
 Thanks to all the contributors!
 
 
