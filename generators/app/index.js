@@ -19,7 +19,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
     if (!this.options['skip-welcome-message']) {
-      var welcomeMessage = 'Out of the box I include '+ chalk.red('AngularJS') + ', ' + chalk.red('Gulp') + ' tasks and ' + chalk.red('Browserify') + ' to build your app.';
+      var welcomeMessage = 'Out of the box I include '+ chalk.red('AngularJS') + ', ' + chalk.red('Gulp') + ' and ' + chalk.red('Browserify') + ' to build your app.';
       this.log(yosay(welcomeMessage));
     }
     var prompts = [
