@@ -5,8 +5,8 @@ html(ng-app='<%= appname %>')
         meta(charset='utf-8')
         meta(name='viewport', content='width=device-width, initial-scale=1')
         title
-        link(href=styles, rel='stylesheet')
+        //styles
 
     body
         div(<% if (includeUIRouter) { %>ui-view=''<% } else { %>ng-view=''<% } %>)
-        script(src=scripts)
+        //scripts
