@@ -3,44 +3,155 @@
 
 var path = require('path');
 var helpers = require('yeoman-generator').test;
+var assert = require('yeoman-generator').assert;
+//var output = require( './mute' );
 
-describe('angulpify generator tests', function () {
+describe('angulpify:app', function () {
   beforeEach(function (done) {
-    helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+    helpers.testDirectory(path.join(__dirname, 'tmp'), function (err) {
       if (err) {
         return done(err);
       }
-
-      this.angulpify = helpers.createGenerator('angulpify:app', [
-        '../../app', [
-          helpers.createDummyGenerator(),
-          'mocha:app'
-        ]
-      ]);
+      this.angulpify = helpers.createGenerator('angulpify:app', ['../../generators/app']);
       this.angulpify.options['skip-install'] = true;
-
+      this.angulpify.options['skip-welcome-message'] = true;
+      //this.angulpify.on('start', output.mute);
+      //this.angulpify.on('end', output.unmute);
       done();
     }.bind(this));
   });
+  /*
+  it('can be imported without blowing up', function () {
+    this.app = require('../generators/app');
+    assert(this.app !== undefined);
+  });
 
-  it('the generator can be required without throwing', function () {
-    this.app = require('../app');
+  it('creates expected config files', function (done) {
+    var expected = [
+      '.editorconfig',
+      '.gitignore',
+      '.jshintrc',
+      '.yo-rc.json'
+    ];
+    helpers.mockPrompt(this.angulpify, {
+      projectName: 'angulpify',
+      languages: [],
+      goodies: []
+    });
+    this.angulpify.run({}, function () {
+      assert.file(expected);
+      done();
+    });
+  });
+
+  it('creates expected Gulp files', function (done) {
+    var expected = [
+      'gulpfile.js',
+      'gulp/config.js',
+      'gulp/index.js',
+      'gulp/tasks/assets.js',
+      'gulp/tasks/browserify.js',
+      'gulp/tasks/clean.js',
+      'gulp/tasks/default.js',
+      'gulp/tasks/images.js',
+      'gulp/tasks/index.js',
+      'gulp/tasks/lint.js',
+      'gulp/tasks/minify.js',
+      'gulp/tasks/serve.js',
+      'gulp/tasks/styles.js',
+      'gulp/tasks/templates.js',
+      'gulp/tasks/watch.js',
+      'gulp/tasks/watchify.js'
+    ];
+    helpers.mockPrompt(this.angulpify, {
+      projectName: 'angulpify',
+      languages: [],
+      goodies: []
+    });
+    this.angulpify.run({}, function () {
+      assert.file(expected);
+      done();
+    });
+  });
+
+  it('creates expected files with CoffeeScript enabled', function (done) {
+    var expected = [
+      'src/modules/index.coffee',
+      'src/modules/app/foo/fooController.coffee',
+      'src/modules/app/foo/index.coffee',
+      'src/modules/app/index.coffee',
+      'src/modules/common/directives/fooDirective.coffee',
+      'src/modules/common/directives/index.coffee',
+      'src/modules/common/filters/fooFilter.coffee',
+      'src/modules/common/filters/index.coffee',
+      'src/modules/common/services/fooService.coffee',
+      'src/modules/common/services/index.coffee',
+      'src/modules/common/index.coffee'
+    ];
+    helpers.mockPrompt(this.angulpify, {
+      projectName: 'angulpify',
+      languages: ['includeCoffeeScript'],
+      goodies: []
+    });
+    this.angulpify.run({}, function () {
+      assert.file(expected);
+      done();
+    });
+  });
+  */
+  it('creates expected files with CoffeeScript disabled', function (done) {
+    var expected = [
+      'src/modules/index.js',
+      'src/modules/app/foo/fooController.js',
+      'src/modules/app/foo/index.js',
+      'src/modules/app/index.js',
+      'src/modules/common/directives/fooDirective.js',
+      'src/modules/common/directives/index.js',
+      'src/modules/common/filters/fooFilter.js',
+      'src/modules/common/filters/index.js',
+      'src/modules/common/services/fooService.js',
+      'src/modules/common/services/index.js',
+      'src/modules/common/index.js'
+    ];
+    helpers.mockPrompt(this.angulpify, {
+      projectName: 'angulpify',
+      languages: [],
+      goodies: []
+    });
+    this.angulpify.run({}, function () {
+      assert.file(expected);
+      done();
+    });
   });
   /*
-  it('creates expected files', function (done) {
+  it('creates expected files with Jade enabled', function (done) {
     var expected = [
-      'bower.json',
-      'package.json',
-      'gulpfile.js'
+      'src/index.jade',
+      'src/modules/app/foo/layout.jade'
     ];
-
     helpers.mockPrompt(this.angulpify, {
-      projectName: 'foo bar',
-      features: ['includeUIRouter']
+      projectName: 'angulpify',
+      languages: ['includeJade'],
+      goodies: []
     });
-
     this.angulpify.run({}, function () {
-      helpers.assertFile(expected);
+      assert.file(expected);
+      done();
+    });
+  });
+
+  it('creates expected files with Jade disabled', function (done) {
+    var expected = [
+      'src/index.html',
+      'src/modules/app/foo/layout.html'
+    ];
+    helpers.mockPrompt(this.angulpify, {
+      projectName: 'angulpify',
+      languages: [],
+      goodies: []
+    });
+    this.angulpify.run({}, function () {
+      assert.file(expected);
       done();
     });
   });

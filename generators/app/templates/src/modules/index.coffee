@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 ###
 browserify-shim dependencies (can be edited in package.json)

@@ -99,7 +99,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       jade: this.includeJade,
       sass: this.includeSass,
       bootstrap: this.includeBootstrap,
-      uiBootrstrap: this.includeUIBootstrap,
+      uiBootstrap: this.includeUIBootstrap,
       uiRouter: this.includeUIRouter
     });
 
@@ -109,8 +109,10 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
   },
   writing: function () {
     var self = this;
-    this.directory('src', 'src');
+    var done = this.async();
+    this.copy('_gulpfile.js', 'gulpfile.js');
     this.directory('gulp', 'gulp');
+    this.directory('src', 'src');
     this.conflicter.resolve(function (err) {
       if (!self.includeJade) {
         globby(self.destinationRoot() + '/src/**/*.jade', function (err, paths) {
@@ -129,6 +131,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
           });
         });
       }
+      done();
     });
   },
   install: function () {
