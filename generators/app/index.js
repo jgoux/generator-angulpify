@@ -15,7 +15,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
     if (!this.options['skip-welcome-message']) {
-      var welcomeMessage = 'Out of the box I include '+ chalk.red('AngularJS') + ', ' + chalk.red('Gulp') + ' and ' + chalk.red('Browserify') + ' to build your app.';
+      var welcomeMessage = 'Out of the box I include '+ chalk.red('AngularJS')+', '+chalk.red('Gulp')+' and '+chalk.red('Browserify')+' to build your app.';
       this.log(yosay(welcomeMessage));
     }
     var prompts = [
@@ -159,7 +159,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
           angular: '~1.2.21'
         }
       };
-      if (this.includeBootstrap) bower.dependencies['bootstrap' + (this.includeSass ? '-sass-official' : '')] = '~3.2.0';
+      if (this.includeBootstrap) bower.dependencies['bootstrap'+(this.includeSass ? '-sass-official' : '')] = '~3.2.0';
       if (this.includeUIBootstrap) bower.dependencies['angular-bootstrap'] = '~0.11.0';
       if (this.includeUIRouter) {
         bower.dependencies['angular-ui-router'] = '~0.2.10';
@@ -176,30 +176,31 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       this.mkdir('src/assets/fonts');
     },
     writeModules: function () {
+      var language = {folderName: 'javascript'};
       if (this.includeCoffeeScript) {
-        this.directory('src/modules/coffeescript', 'src/modules');
+        language = {folderName: 'coffeescript'};
       } else if (this.includeTypeScript) {
-        this.directory('src/modules/typescript', 'src/modules');
-      } else {
-        this.directory('src/modules/javascript', 'src/modules');
+        language = {folderName: 'typescript'};
       }
+      this.directory('src/modules/'+language.folder, 'src/modules');
 
+      var templateEngine = {folderName: 'html', extension: '.html'};
       if (this.includeJade) {
-        this.copy('src/templates/jade/index.jade', 'src/modules');
-        this.copy('src/templates/jade/layout.jade', 'src/modules/app/foo/layout.jade');
-      } else {
-        this.copy('src/templates/jade/index.html', 'src/modules');
-        this.copy('src/templates/jade/layout.html', 'src/modules/app/foo/layout.jade');
+        templateEngine = {folderName: 'jade', extension: '.jade'};
       }
+      this.copy('src/templates/'+templateEngine.folderName+'/index'+templateEngine.extension, 'src/modules/index'+templateEngine.extension);
+      this.copy('src/templates/'+templateEngine.folderName+'/layout'+templateEngine.extension, 'src/modules/app/foo/layout'+templateEngine.extension);
+
     },
     writeStyles: function () {
+      var preprocessor = {folderName: 'css'};
       if (this.includeSass) {
-        this.copy('src/styles/sass', 'src/styles');
+        preprocessor = {folderName: 'sass'};
       } else if (this.includeLess) {
-        this.copy('src/styles/less', 'src/styles');
-      } else {
-        this.copy('src/styles/css', 'src/styles');
+        preprocessor = {folderName: 'less'};
       }
+      this.directory('src/styles/'+preprocessor.folderName, 'src/styles');
+
     }
   },
   install: function () {
@@ -209,7 +210,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       skipInstall: this.options['skip-install'],
       callback: function () {
         if (this.options['skip-install']) {
-          this.log('To finish the installation, run `' + chalk.blue('bower install && npm install') + '`');
+          this.log('To finish the installation, run `'+chalk.blue('bower install && npm install')+'`');
         }
         done();
       }.bind(this)
