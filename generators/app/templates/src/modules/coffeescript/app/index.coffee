@@ -5,6 +5,6 @@ module.exports = angular.module('<%= appname %>', [<% if (includeUIBootstrap) { 
   'ui.router'<% } else { %>
   'ngRoute'<% } %>
   require('../../../tmp/templates').name
-  require('../common').name
-  require('./foo').name
+  require('../common/index').name
+  require('./foo/index').name
 ])

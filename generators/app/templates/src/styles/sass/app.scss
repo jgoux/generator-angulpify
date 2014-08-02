@@ -1,4 +1,4 @@
-<% if (includeBootstrap) { %>@import "variables";
+<% if (includeSass) { %>@import "variables";
 @import "imports";<% } %>
 body {
   text-align: center;
