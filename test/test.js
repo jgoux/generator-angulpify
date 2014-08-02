@@ -4,7 +4,6 @@
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 var assert = require('yeoman-generator').assert;
-//var output = require( './mute' );
 
 describe('angulpify:app', function () {
   beforeEach(function (done) {
@@ -15,12 +14,10 @@ describe('angulpify:app', function () {
       this.angulpify = helpers.createGenerator('angulpify:app', ['../../generators/app']);
       this.angulpify.options['skip-install'] = true;
       this.angulpify.options['skip-welcome-message'] = true;
-      //this.angulpify.on('start', output.mute);
-      //this.angulpify.on('end', output.unmute);
       done();
     }.bind(this));
   });
-  /*
+
   it('can be imported without blowing up', function () {
     this.app = require('../generators/app');
     assert(this.app !== undefined);
@@ -98,7 +95,7 @@ describe('angulpify:app', function () {
       done();
     });
   });
-  */
+
   it('creates expected files with CoffeeScript disabled', function (done) {
     var expected = [
       'src/modules/index.js',
@@ -115,7 +112,7 @@ describe('angulpify:app', function () {
     ];
     helpers.mockPrompt(this.angulpify, {
       projectName: 'angulpify',
-      languages: ['includeJade'],
+      languages: [],
       goodies: []
     });
     this.angulpify.run({}, function () {
@@ -123,7 +120,7 @@ describe('angulpify:app', function () {
       done();
     });
   });
-  /*
+
   it('creates expected files with Jade enabled', function (done) {
     var expected = [
       'src/index.jade',
@@ -155,5 +152,5 @@ describe('angulpify:app', function () {
       done();
     });
   });
-  */
+
 });
