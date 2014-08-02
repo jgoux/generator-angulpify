@@ -1,6 +1,3 @@
-@import "variables";
-@import "imports";
-
 body {
   text-align: center;
   color: #222;
@@ -19,4 +16,3 @@ body {
 a, a:visited {
   text-decoration: none;
 }
-
