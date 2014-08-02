@@ -1,7 +1,6 @@
 'use strict'
 
-module.exports =
 ### @ngInject ###
-fooController = ($scope) ->
+module.exports = ($scope) ->
   $scope.welcome = "Congratulations!"
   return

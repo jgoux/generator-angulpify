@@ -115,7 +115,7 @@ describe('angulpify:app', function () {
     ];
     helpers.mockPrompt(this.angulpify, {
       projectName: 'angulpify',
-      languages: [],
+      languages: ['includeJade'],
       goodies: []
     });
     this.angulpify.run({}, function () {

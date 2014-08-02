@@ -33,6 +33,7 @@
     "fixture-stdout": "^0.2.1",
     "globby": "^0.1.1",
     "jade": "^1.5.0",
+    "mkdirp": "^0.5.0",
     "yeoman-generator": "~0.17.0",
     "yosay": "^0.1.0"
   },

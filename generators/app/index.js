@@ -4,8 +4,10 @@ var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
 var globby = require('globby');
+var mkdirp = require('mkdirp');
 var jade = require('jade');
 var fs = require('fs');
+var path = require('path');
 var coffeeScript = require('coffee-script');
 
 var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
@@ -15,6 +17,75 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
     this.option('skip-install', {desc: 'Skip the bower and node installations'});
   },
   initializing: function () {
+    this.directoryTransform = function (source, destination, transformer, process, bulk) {
+      // Only add sourceRoot if the path is not absolute
+      var root = this.isPathAbsolute(source) ? source : path.join(this.sourceRoot(), source);
+      var files = this.expandFiles('**', { dot: true, cwd: root });
+
+      destination = destination || source;
+
+      if (typeof destination === 'function') {
+        process = destination;
+        destination = source;
+      }
+
+      var cp = this.copyTransform;
+      if (bulk) {
+        cp = this.bulkCopy;
+      }
+
+      // get the path relative to the template root, and copy to the relative destination
+      for (var i in files) {
+        var dest = path.join(destination, files[i]);
+        cp.call(this, path.join(root, files[i]), dest, transformer, process);
+      }
+
+      return this;
+    };
+    this.copyTransform = function (source, destination, transformer, process) {
+
+      var file = this._prepCopy(source, destination, process);
+
+      try {
+        file.body = this.engine(file.body, this);
+      } catch (err) {
+        // this happens in some cases when trying to copy a JS file like lodash/underscore
+        // (conflicting the templating engine)
+      }
+
+      transformer(file);
+
+      this.checkForCollision(file.destination, file.body, function (err, config) {
+        var stats;
+
+        if (err) {
+          config.callback(err);
+          return this.emit('error', err);
+        }
+
+        // create or force means file write, identical or skip prevent the
+        // actual write.
+        if (!/force|create/.test(config.status)) {
+          return config.callback();
+        }
+
+        mkdirp.sync(path.dirname(file.destination));
+        fs.writeFileSync(file.destination, file.body);
+
+        // synchronize stats and modification times from the original file.
+        stats = fs.statSync(file.source);
+        try {
+          fs.chmodSync(file.destination, stats.mode);
+          fs.utimesSync(file.destination, stats.atime, stats.mtime);
+        } catch (err) {
+          this.log.error('Error setting permissions of "' + chalk.bold(file.destination) + '" file: ' + err);
+        }
+
+        config.callback();
+      }.bind(this));
+
+      return this;
+    };
   },
   prompting: function () {
     var done = this.async();
@@ -107,32 +178,24 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
     this.copy('jshintrc', '.jshintrc');
     this.copy('gitignore', '.gitignore');
   },
-  writing: function () {
-    var self = this;
-    var done = this.async();
-    this.copy('_gulpfile.js', 'gulpfile.js');
-    this.directory('gulp', 'gulp');
-    this.directory('src', 'src');
-    this.conflicter.resolve(function (err) {
-      if (!self.includeJade) {
-        globby(self.destinationRoot() + '/src/**/*.jade', function (err, paths) {
-          paths.forEach(function (path) {
-            fs.writeFileSync(path, jade.renderFile(path, {pretty: true}));
-            fs.renameSync(path, path.replace('.jade', '.html'));
-          });
-        });
-      }
-      if (!self.includeCoffeeScript) {
-        globby(self.destinationRoot() + '/src/**/*.coffee', function (err, paths) {
-          paths.forEach(function (path) {
-            var fileData = self.readFileAsString(path);
-            fs.writeFileSync(path, coffeeScript.compile(fileData, {bare: true}));
-            fs.renameSync(path, path.replace('.coffee', '.js'));
-          });
-        });
-      }
-      done();
-    });
+  writing: {
+    writeGulp: function () {
+      this.copy('_gulpfile.js', 'gulpfile.js');
+      this.directory('gulp', 'gulp');
+    },
+    writeSrc: function () {
+      var _this = this;
+      this.directoryTransform('src', 'src', function (file) {
+        if (!_this.includeCoffeeScript && path.extname(file.source) === '.coffee') {
+          file.body = coffeeScript.compile(file.body, {bare: true});
+          file.destination = file.destination.replace('.coffee', '.js');
+        }
+        if (!_this.includeJade && path.extname(file.source) === '.jade') {
+          file.body = jade.render(file.body, {pretty: true});
+          file.destination = file.destination.replace('.jade', '.html');
+        }
+      });
+    }
   },
   install: function () {
 
