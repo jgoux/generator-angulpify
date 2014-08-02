@@ -32,7 +32,9 @@ describe('angulpify:app', function () {
     ];
     helpers.mockPrompt(this.angulpify, {
       projectName: 'angulpify',
-      languages: [],
+      language: 'includeJavascript',
+      preprocessor: 'includeCss',
+      templateEngine: 'includeHtml',
       goodies: []
     });
     this.angulpify.run({}, function () {
@@ -62,7 +64,9 @@ describe('angulpify:app', function () {
     ];
     helpers.mockPrompt(this.angulpify, {
       projectName: 'angulpify',
-      languages: [],
+      language: 'includeJavascript',
+      preprocessor: 'includeCss',
+      templateEngine: 'includeHtml',
       goodies: []
     });
     this.angulpify.run({}, function () {
@@ -87,7 +91,9 @@ describe('angulpify:app', function () {
     ];
     helpers.mockPrompt(this.angulpify, {
       projectName: 'angulpify',
-      languages: ['includeCoffeeScript'],
+      language: 'includeCoffeeScript',
+      preprocessor: 'includeCss',
+      templateEngine: 'includeHtml',
       goodies: []
     });
     this.angulpify.run({}, function () {
@@ -112,7 +118,9 @@ describe('angulpify:app', function () {
     ];
     helpers.mockPrompt(this.angulpify, {
       projectName: 'angulpify',
-      languages: [],
+      language: 'includeJavascript',
+      preprocessor: 'includeCss',
+      templateEngine: 'includeHtml',
       goodies: []
     });
     this.angulpify.run({}, function () {
@@ -128,7 +136,9 @@ describe('angulpify:app', function () {
     ];
     helpers.mockPrompt(this.angulpify, {
       projectName: 'angulpify',
-      languages: ['includeJade'],
+      language: 'includeJavascript',
+      preprocessor: 'includeCss',
+      templateEngine: 'includeJade',
       goodies: []
     });
     this.angulpify.run({}, function () {
@@ -144,7 +154,9 @@ describe('angulpify:app', function () {
     ];
     helpers.mockPrompt(this.angulpify, {
       projectName: 'angulpify',
-      languages: [],
+      language: 'includeJavascript',
+      preprocessor: 'includeCss',
+      templateEngine: 'includeHtml',
       goodies: []
     });
     this.angulpify.run({}, function () {
@@ -161,7 +173,9 @@ describe('angulpify:app', function () {
     ];
     helpers.mockPrompt(this.angulpify, {
       projectName: 'angulpify',
-      languages: ['includeSass'],
+      language: 'includeJavascript',
+      preprocessor: 'includeSass',
+      templateEngine: 'includeHtml',
       goodies: []
     });
     this.angulpify.run({}, function () {
@@ -178,7 +192,9 @@ describe('angulpify:app', function () {
     ];
     helpers.mockPrompt(this.angulpify, {
       projectName: 'angulpify',
-      languages: [],
+      language: 'includeJavascript',
+      preprocessor: 'includeCss',
+      templateEngine: 'includeHtml',
       goodies: []
     });
     this.angulpify.run({}, function () {
@@ -195,7 +211,9 @@ describe('angulpify:app', function () {
     ];
     helpers.mockPrompt(this.angulpify, {
       projectName: 'angulpify',
-      languages: ['includeSass'],
+      language: 'includeJavascript',
+      preprocessor: 'includeSass',
+      templateEngine: 'includeHtml',
       goodies: ['includeBootstrap']
     });
     this.angulpify.run({}, function () {

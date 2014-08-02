@@ -27,7 +27,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       },
       {
         type: 'list',
-        name: 'languages',
+        name: 'language',
         message: 'Would you like to use a language other than JavaScript?',
         choices: [
           {
@@ -47,7 +47,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       },
       {
         type: 'list',
-        name: 'preprocessors',
+        name: 'preprocessor',
         message: 'Would you like to use a preprocessor?',
         choices: [
           {
@@ -67,7 +67,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       },
       {
         type: 'list',
-        name: 'templateEngines',
+        name: 'templateEngine',
         message: 'Would you like to use a template engine?',
         choices: [
           {
@@ -106,7 +106,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
     ];
 
     this.prompt(prompts, function (answers) {
-      var features = [answers.languages].concat([answers.preprocessors], [answers.templateEngines], answers.goodies);
+      var features = [answers.language].concat([answers.preprocessor], [answers.templateEngine], answers.goodies);
       var hasFeature = function (feature) {
         return features.indexOf(feature) !== -1;
       };
@@ -182,13 +182,13 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       } else if (this.includeTypeScript) {
         language = {folderName: 'typescript'};
       }
-      this.directory('src/modules/'+language.folder, 'src/modules');
+      this.directory('src/modules/'+language.folderName, 'src/modules');
 
       var templateEngine = {folderName: 'html', extension: '.html'};
       if (this.includeJade) {
         templateEngine = {folderName: 'jade', extension: '.jade'};
       }
-      this.copy('src/templates/'+templateEngine.folderName+'/index'+templateEngine.extension, 'src/modules/index'+templateEngine.extension);
+      this.copy('src/templates/'+templateEngine.folderName+'/index'+templateEngine.extension, 'src/index'+templateEngine.extension);
       this.copy('src/templates/'+templateEngine.folderName+'/layout'+templateEngine.extension, 'src/modules/app/foo/layout'+templateEngine.extension);
 
     },
