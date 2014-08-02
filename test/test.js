@@ -153,4 +153,57 @@ describe('angulpify:app', function () {
     });
   });
 
+  it('creates expected files with Sass enabled', function (done) {
+    var expected = [
+      'src/styles/app.scss',
+      'src/styles/_imports.scss',
+      'src/styles/_variables.scss',
+    ];
+    helpers.mockPrompt(this.angulpify, {
+      projectName: 'angulpify',
+      languages: ['includeSass'],
+      goodies: []
+    });
+    this.angulpify.run({}, function () {
+      assert.file(expected);
+      assert.fileContent('src/styles/_imports.scss', /You can @import all your bower_components \.sass files here/);
+      assert.fileContent('src/styles/_variables.scss', /You can add\/overwrite all your bower_components \.sass variables here/);
+      done();
+    });
+  });
+
+  it('creates expected files with Sass disabled', function (done) {
+    var expected = [
+      'src/styles/app.css'
+    ];
+    helpers.mockPrompt(this.angulpify, {
+      projectName: 'angulpify',
+      languages: [],
+      goodies: []
+    });
+    this.angulpify.run({}, function () {
+      assert.file(expected);
+      done();
+    });
+  });
+
+  it('creates expected files with Bootstrap included and Sass enabled', function (done) {
+    var expected = [
+      'src/styles/app.scss',
+      'src/styles/_imports.scss',
+      'src/styles/_variables.scss',
+    ];
+    helpers.mockPrompt(this.angulpify, {
+      projectName: 'angulpify',
+      languages: ['includeSass'],
+      goodies: ['includeBootstrap']
+    });
+    this.angulpify.run({}, function () {
+      assert.file(expected);
+      assert.fileContent('src/styles/_imports.scss', /Bootstrap-sass-official \(you can comment unused files\)/);
+      assert.fileContent('src/styles/_variables.scss', /Bootstrap-sass-official/);
+      done();
+    });
+  });
+
 });

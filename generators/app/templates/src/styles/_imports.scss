@@ -1,4 +1,4 @@
-//
+<% if (includeBootstrap) { %>//
 // Bootstrap-sass-official (you can comment unused files)
 // ----------------------------------------------------------------------------------------------------
 // Core variables and mixins
@@ -45,4 +45,6 @@
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/carousel";
 // Utility classes
 @import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/utilities";
-@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/responsive-utilities";
+@import "../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/responsive-utilities";<% } else { %>//
+// You can @import all your bower_components .sass files here
+// ----------------------------------------------------------------------------------------------------<% } %>

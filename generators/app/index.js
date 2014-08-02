@@ -8,6 +8,7 @@ var jade = require('jade');
 var fs = require('fs');
 var path = require('path');
 var coffeeScript = require('coffee-script');
+var sass = require('node-sass');
 
 var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
   constructor: function () {
@@ -196,7 +197,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       if (this.includeUIRouter) {
         bower.dependencies['angular-ui-router'] = '~0.2.10';
       } else {
-        bower.dependencies['angular-route'] = '~1.2.20';
+        bower.dependencies['angular-route'] = '~1.2.21';
       }
       this.write('bower.json', JSON.stringify(bower, null, 2));
     },
@@ -205,6 +206,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
     },
     writeModules: function () {
       var _this = this;
+
       this.directoryTransform('src/modules', 'src/modules', function (file) {
         if (!_this.includeCoffeeScript && path.extname(file.source) === '.coffee') {
           file.body = coffeeScript.compile(file.body, {bare: true});
@@ -215,6 +217,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
           file.destination = file.destination.replace('.jade', '.html');
         }
       });
+
       this.copyTransform('src/index.jade', 'src/index.jade', function (file) {
         if (!_this.includeJade) {
           file.body = jade.render(file.body, {pretty: true});
@@ -227,7 +230,17 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       this.mkdir('src/assets/fonts');
     },
     writeStyles: function () {
-      this.directory('src/styles', 'src/styles');
+      var _this = this;
+      this.copyTransform('src/styles/app.scss', 'src/styles/app.scss', function (file) {
+        if (!_this.includeSass) {
+          file.body = sass.renderSync({data: file.body});
+          file.destination = file.destination.replace('.scss', '.css');
+        }
+      });
+      if (this.includeSass) {
+        this.copy('src/styles/_imports.scss', 'src/styles/_imports.scss');
+        this.copy('src/styles/_variables.scss', 'src/styles/_variables.scss');
+      }
     }
   },
   install: function () {
