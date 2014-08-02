@@ -183,9 +183,9 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       this.copy('_gulpfile.js', 'gulpfile.js');
       this.directory('gulp', 'gulp');
     },
-    writeSrc: function () {
+    writeModules: function () {
       var _this = this;
-      this.directoryTransform('src', 'src', function (file) {
+      this.directoryTransform('src/modules', 'src/modules', function (file) {
         if (!_this.includeCoffeeScript && path.extname(file.source) === '.coffee') {
           file.body = coffeeScript.compile(file.body, {bare: true});
           file.destination = file.destination.replace('.coffee', '.js');
@@ -195,6 +195,18 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
           file.destination = file.destination.replace('.jade', '.html');
         }
       });
+      this.copyTransform('src/index.jade', 'src/index.jade', function (file) {
+        if (!_this.includeJade) {
+          file.body = jade.render(file.body, {pretty: true});
+          file.destination = file.destination.replace('.jade', '.html');
+        }
+      });
+    },
+    writeAssets: function () {
+      this.directory('src/assets', 'src/assets');
+    },
+    writeStyles: function () {
+      this.directory('src/styles', 'src/styles');
     }
   },
   install: function () {
