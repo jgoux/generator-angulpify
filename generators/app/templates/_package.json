@@ -9,7 +9,7 @@
   "devDependencies": {
     "browserify-shim": "^3.6.0"<% if (includeCoffeeScript) { %>,
     "coffeeify": "^0.7.0"<% } %>,
-    "connect": "^2.19.6",
+    "connect": "^2.24.2",
     "gulp": "^3.8.0",
     "gulp-angular-templatecache": "^1.2.1",
     "gulp-autoprefixer": "0.0.8"<% if (includeCoffeeScript) { %>,
@@ -26,7 +26,7 @@
     "gulp-replace": "^0.4.0",
     "gulp-rename": "^1.2.0",
     "gulp-rimraf": "^0.1.0"<% if (includeSass) { %>,
-    "gulp-ruby-sass": "^0.5.0"<% } if (includeLess) { %>,
+    "gulp-ruby-sass": "^0.7.1"<% } if (includeLess) { %>,
     "gulp-sourcemaps": "^1.1.0"<% } if (includeTypeScript) { %>,
     "gulp-tslint": "^1.3.0"<% } %>,
     "gulp-uglify": "^0.3.0",
