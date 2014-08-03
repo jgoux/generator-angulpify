@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var watch = require('gulp-watch');
 var livereload = require('gulp-livereload');
-  livereloadServer = livereload(config.ports.livereloadServer);
+livereloadServer = livereload(config.ports.livereloadServer);
 
 module.exports = gulp.task('watch', function () {
   gulp.watch(config.paths.src.livereload).on('change', function (file) {
