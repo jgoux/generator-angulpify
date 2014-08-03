@@ -14,7 +14,7 @@ This project is still in early stage of development, so use with caution. API br
 
 * Require() everywhere to build a modular application
 * Built-in preview server with livereload
-* Automagically compile CoffeeScript (you can use plain JavaScript of you prefer!)
+* Automagically compile CoffeeScript (you can use plain JavaScript if you prefer!)
 * Automagically lint your scripts
 * Automagically compile Sass/Less (you can still use CSS too!)
 * CSS Autoprefixing
@@ -23,7 +23,7 @@ This project is still in early stage of development, so use with caution. API br
 * Wire-up Bower dependencies easily with browserify-shim
 * Bundle your application for two environments (build/release)
 
-*For more information on what this generator can do for you, take a look at the [gulp plugins](app/templates/_package.json).*
+*For more information on what this generator can do for you, take a look at the [gulp plugins](generators/app/templates/_package.json).*
 
 ## Tooling
 
