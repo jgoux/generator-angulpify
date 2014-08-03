@@ -5,7 +5,16 @@ var path = require('path');
 var helpers = require('yeoman-generator').test;
 var assert = require('yeoman-generator').assert;
 
-describe('angulpify:app', function () {
+describe('angulpify: default features (javascript/css/html)', function () {
+
+  var mockPrompts = {
+    projectName: 'angulpify',
+    language: 'includeJavaScript',
+    preprocessor: 'includeCss',
+    templateEngine: 'includeHtml',
+    goodies: []
+  };
+
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'tmp'), function (err) {
       if (err) {
@@ -14,6 +23,9 @@ describe('angulpify:app', function () {
       this.angulpify = helpers.createGenerator('angulpify:app', ['../../generators/app']);
       this.angulpify.options['skip-install'] = true;
       this.angulpify.options['skip-welcome-message'] = true;
+
+      helpers.mockPrompt(this.angulpify, mockPrompts);
+
       done();
     }.bind(this));
   });
@@ -23,27 +35,20 @@ describe('angulpify:app', function () {
     assert(this.app !== undefined);
   });
 
-  it('creates expected config files with default options', function (done) {
+  it('creates expected config files', function (done) {
     var expected = [
       '.editorconfig',
       '.gitignore',
       '.jshintrc',
       '.yo-rc.json'
     ];
-    helpers.mockPrompt(this.angulpify, {
-      projectName: 'angulpify',
-      language: 'includeJavascript',
-      preprocessor: 'includeCss',
-      templateEngine: 'includeHtml',
-      goodies: []
-    });
     this.angulpify.run({}, function () {
       assert.file(expected);
       done();
     });
   });
 
-  it('creates expected Gulp files', function (done) {
+  it('creates expected gulp files', function (done) {
     var expected = [
       'gulpfile.js',
       'gulp/config.js',
@@ -62,47 +67,13 @@ describe('angulpify:app', function () {
       'gulp/tasks/watch.js',
       'gulp/tasks/watchify.js'
     ];
-    helpers.mockPrompt(this.angulpify, {
-      projectName: 'angulpify',
-      language: 'includeJavascript',
-      preprocessor: 'includeCss',
-      templateEngine: 'includeHtml',
-      goodies: []
-    });
     this.angulpify.run({}, function () {
       assert.file(expected);
       done();
     });
   });
 
-  it('creates expected files with CoffeeScript enabled', function (done) {
-    var expected = [
-      'src/modules/index.coffee',
-      'src/modules/app/foo/fooController.coffee',
-      'src/modules/app/foo/index.coffee',
-      'src/modules/app/index.coffee',
-      'src/modules/common/directives/fooDirective.coffee',
-      'src/modules/common/directives/index.coffee',
-      'src/modules/common/filters/fooFilter.coffee',
-      'src/modules/common/filters/index.coffee',
-      'src/modules/common/services/fooService.coffee',
-      'src/modules/common/services/index.coffee',
-      'src/modules/common/index.coffee'
-    ];
-    helpers.mockPrompt(this.angulpify, {
-      projectName: 'angulpify',
-      language: 'includeCoffeeScript',
-      preprocessor: 'includeCss',
-      templateEngine: 'includeHtml',
-      goodies: []
-    });
-    this.angulpify.run({}, function () {
-      assert.file(expected);
-      done();
-    });
-  });
-
-  it('creates expected files with CoffeeScript disabled', function (done) {
+  it('creates expected script files', function (done) {
     var expected = [
       'src/modules/index.js',
       'src/modules/app/foo/fooController.js',
@@ -116,110 +87,29 @@ describe('angulpify:app', function () {
       'src/modules/common/services/index.js',
       'src/modules/common/index.js'
     ];
-    helpers.mockPrompt(this.angulpify, {
-      projectName: 'angulpify',
-      language: 'includeJavascript',
-      preprocessor: 'includeCss',
-      templateEngine: 'includeHtml',
-      goodies: []
-    });
     this.angulpify.run({}, function () {
       assert.file(expected);
       done();
     });
   });
 
-  it('creates expected files with Jade enabled', function (done) {
+  it('creates expected style files', function (done) {
     var expected = [
-      'src/index.jade',
-      'src/modules/app/foo/layout.jade'
+      'src/styles/app.css'
     ];
-    helpers.mockPrompt(this.angulpify, {
-      projectName: 'angulpify',
-      language: 'includeJavascript',
-      preprocessor: 'includeCss',
-      templateEngine: 'includeJade',
-      goodies: []
-    });
     this.angulpify.run({}, function () {
       assert.file(expected);
       done();
     });
   });
 
-  it('creates expected files with Jade disabled', function (done) {
+  it('creates expected template files', function (done) {
     var expected = [
       'src/index.html',
       'src/modules/app/foo/layout.html'
     ];
-    helpers.mockPrompt(this.angulpify, {
-      projectName: 'angulpify',
-      language: 'includeJavascript',
-      preprocessor: 'includeCss',
-      templateEngine: 'includeHtml',
-      goodies: []
-    });
     this.angulpify.run({}, function () {
       assert.file(expected);
-      done();
-    });
-  });
-
-  it('creates expected files with Sass enabled', function (done) {
-    var expected = [
-      'src/styles/app.scss',
-      'src/styles/_imports.scss',
-      'src/styles/_variables.scss',
-    ];
-    helpers.mockPrompt(this.angulpify, {
-      projectName: 'angulpify',
-      language: 'includeJavascript',
-      preprocessor: 'includeSass',
-      templateEngine: 'includeHtml',
-      goodies: []
-    });
-    this.angulpify.run({}, function () {
-      assert.file(expected);
-      assert.fileContent('src/styles/_imports.scss', /You can @import all your bower_components \.sass files here/);
-      assert.fileContent('src/styles/_variables.scss', /You can add\/overwrite all your bower_components \.sass variables here/);
-      done();
-    });
-  });
-
-  it('creates expected files with Sass disabled', function (done) {
-    var expected = [
-      'src/styles/app.css'
-    ];
-    helpers.mockPrompt(this.angulpify, {
-      projectName: 'angulpify',
-      language: 'includeJavascript',
-      preprocessor: 'includeCss',
-      templateEngine: 'includeHtml',
-      goodies: []
-    });
-    this.angulpify.run({}, function () {
-      assert.file(expected);
-      done();
-    });
-  });
-
-  it('creates expected files with Bootstrap included and Sass enabled', function (done) {
-    var expected = [
-      'src/styles/app.scss',
-      'src/styles/_imports.scss',
-      'src/styles/_variables.scss',
-    ];
-    helpers.mockPrompt(this.angulpify, {
-      projectName: 'angulpify',
-      language: 'includeJavascript',
-      preprocessor: 'includeSass',
-      templateEngine: 'includeHtml',
-      goodies: ['includeBootstrap']
-    });
-    this.angulpify.run({}, function () {
-      assert.file(expected);
-      assert.fileContent('src/styles/_imports.scss', /Bootstrap-sass-official \(you can comment unused files\)/);
-      assert.fileContent('src/styles/_variables.scss', /Bootstrap-sass-official/);
       done();
     });
   });
