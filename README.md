@@ -13,11 +13,12 @@ This project is still in early stage of development, so use with caution. API br
 ## Features
 
 * Require() everywhere to build a modular application
-* CSS Autoprefixing
 * Built-in preview server with livereload
-* Automagically compile Sass
-* Automagically compile your Jade templates into $templateCache
+* Automagically compile CoffeeScript (you can use plain JavaScript of you prefer!)
 * Automagically lint your scripts
+* Automagically compile Sass/Less (you can still use CSS too!)
+* CSS Autoprefixing
+* Automagically compile your Jade (or HTML if you want!) templates into $templateCache
 * Awesome image optimization
 * Wire-up Bower dependencies easily with browserify-shim
 * Bundle your application for two environments (build/release)
@@ -31,8 +32,7 @@ This generator relies on several technologies, make sure your system has:
 - [Yeoman](http://yeoman.io/learning/index.html)
 - [Bower](http://bower.io/#install-bower)
 - [Gulp](http://gulpjs.com)
-- [Ruby](https://www.ruby-lang.org/en/installation/)
-- [Sass](http://sass-lang.com/install)
+- [[Ruby](https://www.ruby-lang.org/en/installation/) + [Sass](http://sass-lang.com/install)] | Optional
 
 
 ## Getting Started
@@ -58,9 +58,6 @@ More to come.
 
 - `--skip-install`
   Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
-
-- `--test-framework=<framework>`
-  Defaults to `mocha`. Can be switched for another supported testing framework like `jasmine`.
 
 
 ## Contribute
