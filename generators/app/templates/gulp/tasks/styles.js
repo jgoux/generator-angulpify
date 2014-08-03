@@ -20,7 +20,7 @@ module.exports = gulp.task('styles', function () {
   return gulp.src(config.paths.src.styles)<% if (includeLess) { %>
     .pipe(gulpif(!release, sourcemaps.init()))
     .pipe(less().on('error', handleError))<% } else if (includeSass) { %>
-    .pipe(gulpif(release, sass().on('error', handleError), sass({sourcemap: true, sourcemapPath: '../src/styles'}).on('error', handleError)))<% } %>
+    .pipe(gulpif(release, sass().on('error', handleError), sass(/*{sourcemap: true, sourcemapPath: '../src/styles'}*/).on('error', handleError)))<% } %>
     .pipe(autoprefixer('last 1 version'))
     .pipe(gulpif(release, csso()))<% if (includeLess) { %>
     .pipe(gulpif(!release, sourcemaps.write()))<% } %>
