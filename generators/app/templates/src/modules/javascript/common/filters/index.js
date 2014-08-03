@@ -2,4 +2,4 @@
 
 module.exports =
   angular.module('<%= appname %>.common.filters', []);
-//.filter('fooFilter', require('./fooFilter'));
+  //.filter('fooFilter', require('./fooFilter'));
