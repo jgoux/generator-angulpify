@@ -145,7 +145,11 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
     this.copy('editorconfig', '.editorconfig');
     this.copy('jshintrc', '.jshintrc');
     this.copy('gitignore', '.gitignore');
-    if (this.includeTypeScript) this.copy('_tslint.json', 'tslint.json');
+    if (this.includeCoffeeScript) {
+      this.copy('_coffeelint.json', 'coffeelint.json');
+    } else if (this.includeTypeScript) {
+      this.copy('_tslint.json', 'tslint.json');
+    }
   },
   writing: {
     writeGulp: function () {
