@@ -46,7 +46,7 @@ This generator relies on several technologies, make sure your system has:
 
 *(HTML/CSS/JS/Images/etc)*
 
-To install dependencies, run `bower install --save package-name` to get the files, then add an entry into the [browser](app/templates/_package.json#L32) key of your `package.json`.
+To install dependencies, run `bower install --save package-name` to get the files, then add an entry into the [browser](generators/app/templates/_package.json#L41) key of your `package.json`.
 
 
 ## Docs
