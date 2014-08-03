@@ -23,7 +23,7 @@ describe('angulpify:app', function () {
     assert(this.app !== undefined);
   });
 
-  it('creates expected config files', function (done) {
+  it('creates expected config files with default options', function (done) {
     var expected = [
       '.editorconfig',
       '.gitignore',

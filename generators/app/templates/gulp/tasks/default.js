@@ -1,7 +1,7 @@
 'use strict';
 
-var gulp = require('gulp'),
-  runSequence = require('run-sequence');
+var gulp = require('gulp');
+var runSequence = require('run-sequence');
 
 module.exports = gulp.task('default', function () {
   if (release) {

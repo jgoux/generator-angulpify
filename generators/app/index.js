@@ -40,7 +40,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
           },
           {
             name: 'JavaScript is all I need',
-            value: 'includeJavascript'
+            value: 'includeJavaScript'
           }
         ],
         default: 2
@@ -115,7 +115,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
 
       this.includeCoffeeScript = hasFeature('includeCoffeeScript');
       this.includeTypeScript = hasFeature('includeTypeScript');
-      this.includeJavascript = hasFeature('includeJavascript');
+      this.includeJavaScript = hasFeature('includeJavaScript');
 
       this.includeLess = hasFeature('includeLess');
       this.includeSass = hasFeature('includeSass');
@@ -145,6 +145,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
     this.copy('editorconfig', '.editorconfig');
     this.copy('jshintrc', '.jshintrc');
     this.copy('gitignore', '.gitignore');
+    if (this.includeTypeScript) this.copy('_tslint.json', 'tslint.json');
   },
   writing: {
     writeGulp: function () {
@@ -204,17 +205,11 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
     }
   },
   install: function () {
-    var done = this.async();
-    this.installDependencies({
-      skipMessage: this.options['skip-install-message'],
-      skipInstall: this.options['skip-install'],
-      callback: function () {
-        if (this.options['skip-install']) {
-          this.log('To finish the installation, run `'+chalk.blue('bower install && npm install')+'`');
-        }
-        done();
-      }.bind(this)
-    });
+    if (this.options['skip-install']) {
+      this.log('To finish the installation, run `'+chalk.blue('bower install && npm install')+'`');
+    } else {
+      this.installDependencies();
+    }
   },
   end: function () {
   }

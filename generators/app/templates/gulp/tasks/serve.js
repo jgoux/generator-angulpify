@@ -1,10 +1,8 @@
 'use strict';
 
-var gulp = require('gulp'),
-  connect = require('connect'),
-  staticServer = connect();
-
-// TODO: Try browser-sync instead of connect + gulp-livereload
+var gulp = require('gulp');
+var connect = require('connect');
+var staticServer = connect();
 
 module.exports = gulp.task('serve', function (next) {
   var staticServerPath = BUILD_FOLDER;

@@ -1,13 +1,22 @@
 'use strict';
 
-var gulp = require('gulp'),
-  watchify = require('watchify'),
-  browserifyShim = require('browserify-shim'),
-  source = require('vinyl-source-stream');
+var gulp = require('gulp');
+var watchify = require('watchify');
+var source = require('vinyl-source-stream');
+var browserifyShim = require('browserify-shim');<% if (includeCoffeeScript) { %>
+var coffeeify = require('coffeeify');<% } else if (includeTypeScript) { %>
+var typescriptifier = require('typescriptifier');<% } %>
 
 module.exports = gulp.task('watchify', function () {
-  var bundler = watchify(config.paths.src.modules);
+  var bundler = watchify({
+    entries: [config.paths.src.modules]<% if (includeCoffeeScript) { %>,
+    extensions: ['.coffee']<% } else if (includeTypeScript) { %>,
+    extensions: ['.ts']<% } %>
+  });
 
+  <% if (includeCoffeeScript) { %>
+  bundler.transform(coffeeify);<% } else if (includeTypeScript) { %>
+  bundler.transform(typescriptifier);<% } %>
   bundler.transform(browserifyShim);
 
   bundler.on('update', rebundle);
