@@ -11,6 +11,7 @@ global.config = {
       images: SRC_FOLDER + '/assets/images/**/*',
       scripts: SRC_FOLDER + '/modules/**/*.<% if (includeCoffeeScript) { %>coffee<% } else if (includeTypeScript) { %>ts<% } else { %>js<% } %>',
       styles: SRC_FOLDER + '/styles/app.<% if (includeLess) { %>less<% } else if (includeSass) { %>scss<% } else { %>css<% } %>',
+      stylesGlob: SRC_FOLDER + '/styles/**/*.<% if (includeLess) { %>less<% } else if (includeSass) { %>scss<% } else { %>css<% } %>',
       templates: SRC_FOLDER + '/modules/**/*.<% if (includeJade) { %>jade<% } else { %>html<% } %>',
       templatesCompiled: TMP_FOLDER,
       livereload: [BUILD_FOLDER + '/**/*', '!' + BUILD_FOLDER + '/assets/**/*'],

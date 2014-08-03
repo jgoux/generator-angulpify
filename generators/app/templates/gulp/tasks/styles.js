@@ -19,11 +19,11 @@ function handleError(err) {
 module.exports = gulp.task('styles', function () {
   return gulp.src(config.paths.src.styles)<% if (includeLess) { %>
     .pipe(gulpif(!release, sourcemaps.init()))
-    .pipe(less().on('error', handleError))
-    .pipe(gulpif(!release, sourcemaps.write()))<% } else if (includeSass) { %>
+    .pipe(less().on('error', handleError))<% } else if (includeSass) { %>
     .pipe(gulpif(release, sass().on('error', handleError), sass({sourcemap: true, sourcemapPath: '../src/styles'}).on('error', handleError)))<% } %>
     .pipe(autoprefixer('last 1 version'))
-    .pipe(gulpif(release, csso()))
+    .pipe(gulpif(release, csso()))<% if (includeLess) { %>
+    .pipe(gulpif(!release, sourcemaps.write()))<% } %>
     .pipe(gulpif(release, rename(config.filenames.release.styles), rename(config.filenames.build.styles)))
     .pipe(gulpif(release, gulp.dest(config.paths.dest.release.styles), gulp.dest(config.paths.dest.build.styles)));
 });
