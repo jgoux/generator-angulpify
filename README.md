@@ -40,6 +40,7 @@ This generator relies on several technologies, make sure your system has:
 - Install: `npm install -g generator-angulpify`
 - Run: `yo angulpify`
 - Run `gulp` for building to the `build` directory and `gulp --release` for building to the `release` directory
+- Open your browser, go to http://localhost:8080, and enjoy
 
 
 #### Third-Party Dependencies
