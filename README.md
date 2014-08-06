@@ -32,6 +32,7 @@ This generator relies on several technologies, make sure your system has:
 - [Yeoman](http://yeoman.io/learning/index.html)
 - [Bower](http://bower.io/#install-bower)
 - [Gulp](http://gulpjs.com)
+- [LiveReload](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions)
 - [[Ruby](https://www.ruby-lang.org/en/installation/) + [Sass](http://sass-lang.com/install)] | Optional
 
 
@@ -39,8 +40,11 @@ This generator relies on several technologies, make sure your system has:
 
 - Install: `npm install -g generator-angulpify`
 - Run: `yo angulpify`
-- Run `gulp` for building to the `build` directory and `gulp --release` for building to the `release` directory
-- Open your browser, go to http://localhost:8080, and enjoy
+- Run:
+  * `gulp` for building to the `build` directory
+  * `gulp --release` for building to the `release` directory
+- Go to http://localhost:8080
+- Enjoy!
 
 
 #### Third-Party Dependencies
