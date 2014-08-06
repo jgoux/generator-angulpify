@@ -1,9 +1,8 @@
 {
   "name": "generator-angulpify",
   "version": "0.1.0",
-  "description": "An opiniated Yeoman generator involving AngularJS, Gulp and Browserify",
+  "description": "Yeoman generator involving AngularJS, Gulp and Browserify",
   "license": "MIT",
-  "main": "app/index.js",
   "repository": "jgoux/generator-angulpify",
   "author": {
     "name": "Julien Goux",
@@ -16,9 +15,6 @@
   "scripts": {
     "test": "mocha --reporter spec"
   },
-  "files": [
-    "app"
-  ],
   "keywords": [
     "yeoman-generator",
     "angularjs",
