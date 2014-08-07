@@ -13,6 +13,7 @@ global.config = {
       styles: SRC_FOLDER + '/styles/app.<% if (includeLess) { %>less<% } else if (includeSass) { %>scss<% } else { %>css<% } %>',
       stylesGlob: SRC_FOLDER + '/styles/**/*.<% if (includeLess) { %>less<% } else if (includeSass) { %>scss<% } else { %>css<% } %>',
       templates: SRC_FOLDER + '/modules/**/*.<% if (includeJade) { %>jade<% } else { %>html<% } %>',
+      templatesHTML: SRC_FOLDER + '/modules/**/*.html',
       templatesCompiled: TMP_FOLDER,
       livereload: [BUILD_FOLDER + '/**/*', '!' + BUILD_FOLDER + '/assets/**/*'],
       modules: './' + SRC_FOLDER + '/modules/index.<% if (includeCoffeeScript) { %>coffee<% } else if (includeTypeScript) { %>ts<% } else { %>js<% } %>'
