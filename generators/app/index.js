@@ -84,7 +84,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       {
         type: 'checkbox',
         name: 'goodies',
-        message: 'I promess it\'s the last one, what more would you like?',
+        message: 'I promise it\'s the last one, what more would you like?',
         choices: [
           {
             name: 'Bootstrap',
