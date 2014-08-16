@@ -134,12 +134,17 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
   configuring: function () {
     this.config.set({
       projectName: this.appname,
-      coffee: this.includeCoffeeScript,
-      jade: this.includeJade,
-      sass: this.includeSass,
-      bootstrap: this.includeBootstrap,
-      uiBootstrap: this.includeUIBootstrap,
-      uiRouter: this.includeUIRouter
+      includeCoffeeScript: this.includeCoffeeScript,
+      includeTypeScript: this.includeTypeScript,
+      includeJavaScript: this.includeJavaScript,
+      includeLess: this.includeLess,
+      includeSass: this.includeSass,
+      includeCss: this.includeCss,
+      includeJade: this.includeJade,
+      includeHtml: this.includeHtml,
+      includeBootstrap: this.includeBootstrap,
+      includeUIBootstrap: this.includeUIBootstrap,
+      includeUIRouter: this.includeUIRouter
     });
 
     this.copy('editorconfig', '.editorconfig');
