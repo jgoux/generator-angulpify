@@ -1,5 +1,4 @@
-# Angulpify generator [![Build Status](https://secure.travis-ci.org/jgoux/generator-angulpify.svg?branch=master)](http://travis-ci.org/jgoux/generator-angulpify)
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/jgoux/generator-angulpify?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Angulpify generator [![Build Status](https://secure.travis-ci.org/jgoux/generator-angulpify.svg?branch=master)](http://travis-ci.org/jgoux/generator-angulpify) [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/jgoux/generator-angulpify?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > [Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app using [angularjs](https://angularjs.org/), [gulp](http://gulpjs.com/) and [browserify](http://browserify.org/)
 
