@@ -1,29 +1,28 @@
 'use strict';
 
 var gulp = require('gulp');
+var env = require('../env');
+var rev = require('gulp-rev');
 var gulpif = require('gulp-if');
-var rename = require('gulp-rename');
 var csso = require('gulp-csso');
-var autoprefixer = require('gulp-autoprefixer');<% if (includeLess) { %>
-var less = require('gulp-less');
-var sourcemaps = require('gulp-sourcemaps');<% } else if (includeSass) { %>
-var sass = require('gulp-ruby-sass');<% } %>
+var filter = require('gulp-filter');
+var rename = require('gulp-rename');
+var sass = require('gulp-ruby-sass');
+var autoprefixer = require('gulp-autoprefixer');
 
-<% if (includeLess || includeSass) { %>
-function handleError(err) {
-  console.log(err.toString());
-  this.emit('end');
-}
-<% } %>
+var config = require('../config').styles;
 
-module.exports = gulp.task('styles', function () {
-  return gulp.src(config.paths.src.styles)<% if (includeLess) { %>
-    .pipe(gulpif(!release, sourcemaps.init()))
-    .pipe(less().on('error', handleError))<% } else if (includeSass) { %>
-    .pipe(gulpif(release, sass().on('error', handleError), sass(/*{sourcemap: true, sourcemapPath: '../src/styles'}*/).on('error', handleError)))<% } %>
+gulp.task('styles', function () {
+  var cssFilter = filter(config.cssFilter);
+
+  return gulp.src(config.src)
+    .pipe(sass(config.sass))
+    .pipe(cssFilter)
     .pipe(autoprefixer('last 1 version'))
-    .pipe(gulpif(release, csso()))<% if (includeLess) { %>
-    .pipe(gulpif(!release, sourcemaps.write()))<% } %>
-    .pipe(gulpif(release, rename(config.filenames.release.styles), rename(config.filenames.build.styles)))
-    .pipe(gulpif(release, gulp.dest(config.paths.dest.release.styles), gulp.dest(config.paths.dest.build.styles)));
+    .pipe(csso())
+    .pipe(cssFilter.restore())
+    .pipe(rename(config.rename))
+    .pipe(gulpif(env.isProd(), rev()))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest(config.dest));
 });

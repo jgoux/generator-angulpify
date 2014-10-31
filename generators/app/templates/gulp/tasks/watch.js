@@ -2,16 +2,34 @@
 
 var gulp = require('gulp');
 var watch = require('gulp-watch');
-var livereload = require('gulp-livereload');
-var livereloadServer = livereload(config.ports.livereloadServer);
+var browserSync = require('browser-sync');
 
-module.exports = gulp.task('watch', function () {
-  gulp.watch(config.paths.src.livereload).on('change', function (file) {
-    livereloadServer.changed(file.path);
+var config = require('../config').watch;
+
+gulp.task('watch', function () {
+  watch(config.lint, function(files, cb) {
+    gulp.start('lint', cb);
   });
 
-  watch({ glob: [config.paths.src.scripts]}, ['lint']);
-  watch({ glob: [config.paths.src.index]}, ['index']);
-  watch({ glob: [config.paths.src.templates, config.paths.src.templatesHTML]}, ['templates']);
-  watch({ glob: [config.paths.src.stylesGlob]}, ['styles']);
+  watch(config.index, function(files, cb) {
+    gulp.start('index', cb);
+  });
+
+  watch(config.templates, function(files, cb) {
+    gulp.start('templates', cb);
+  });
+
+  watch(config.config, function(files, cb) {
+    gulp.start('config', cb);
+  });
+
+  watch(config.styles, function(files, cb) {
+    gulp.start(['styles'], function() {
+      browserSync.reload(config.styles_output)
+    });
+  });
+
+  watch(config.reload, function() {
+    browserSync.reload();
+  });
 });

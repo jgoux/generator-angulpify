@@ -1,9 +1,17 @@
 'use strict';
 
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
+var filter = require('gulp-filter');
+var imagemin = require('gulp-imagemin');
 
-module.exports = gulp.task('assets', function () {
-  return gulp.src(config.paths.src.assets)
-    .pipe(gulpif(release, gulp.dest(config.paths.dest.release.assets), gulp.dest(config.paths.dest.build.assets)));
+var config = require('../config').assets;
+
+gulp.task('assets', function () {
+  var imagesFilter = filter(config.imagesFilter);
+
+  return gulp.src(config.src)
+    .pipe(imagesFilter)
+    .pipe(imagemin(config.imagemin))
+    .pipe(imagesFilter.restore())
+    .pipe(gulp.dest(config.dest));
 });

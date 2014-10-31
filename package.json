@@ -1,6 +1,6 @@
 {
   "name": "generator-angulpify",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Yeoman generator involving AngularJS, Gulp and Browserify",
   "license": "MIT",
   "repository": "jgoux/generator-angulpify",
@@ -10,7 +10,8 @@
     "url": "https://github.com/jgoux"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.10.0",
+    "npm": ">=1.3"
   },
   "scripts": {
     "test": "mocha --reporter spec"
@@ -25,13 +26,13 @@
   ],
   "dependencies": {
     "chalk": "^0.5.1",
-    "yeoman-generator": "^0.17.2",
+    "globby": "^0.1.1",
+    "gulp": "^3.8.9",
+    "yeoman-generator": "^0.17.7",
+    "yo": "^1.3.3",
     "yosay": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "*"
-  },
-  "peerDependencies": {
-    "yo": ">=1.0.0"
+    "mocha": "^2.0.1"
   }
 }

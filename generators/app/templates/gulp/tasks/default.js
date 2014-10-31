@@ -1,21 +1,25 @@
 'use strict';
 
 var gulp = require('gulp');
+var env = require('../env');
 var runSequence = require('run-sequence');
 
-module.exports = gulp.task('default', function () {
-  if (release) {
+gulp.task('default', function () {
+  if (env.isDev()) {
     runSequence(
-      'clean',
-      ['index', 'styles', 'images', 'assets', 'templates', 'lint'],
-      'browserify',
-      ['minify', 'serve']
+      ['clean'],
+      ['assets', 'config', 'lint', 'styles', 'templates'],
+      ['browserify:app', 'browserify:vendors'],
+      ['index'],
+      ['watch'],
+      ['serve']
     );
-  } else {
+  } else if (env.isProd()) {
     runSequence(
-      'clean',
-      ['index', 'styles', 'images', 'assets', 'templates', 'lint'],
-      ['watchify', 'watch', 'serve']
+      ['clean'],
+      ['assets', 'config', 'lint', 'styles', 'templates'],
+      ['browserify:app', 'browserify:vendors'],
+      ['index']
     );
   }
 });
