@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var env = require('../env');
+var env = require('../utilities').env;
 var runSequence = require('run-sequence');
 
 gulp.task('default', function () {

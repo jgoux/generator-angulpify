@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var env = require('../env');
+var env = require('../utilities').env;
 var rev = require('gulp-rev');
 var gulpif = require('gulp-if');
 var csso = require('gulp-csso');
@@ -17,12 +17,12 @@ gulp.task('styles', function () {
   return gulp.src(config.src)
     .pipe(plumber())
     .pipe(rename(config.rename))
+    .pipe(gulpif(env.isProd(), rev()))
     .pipe(rename({suffix: '.min'}))
-    //.pipe(sourcemaps.init())
+    //.pipe(gulpif(env.isDev(), sourcemaps.init()))
     .pipe(sass(config.sass))
     .pipe(autoprefixer(config.autoprefixer))
     .pipe(csso())
-    //.pipe(sourcemaps.write('./'))
-    .pipe(gulpif(env.isProd(), rev()))
+    //.pipe(gulpif(env.isDev(), sourcemaps.write('./')))
     .pipe(gulp.dest(config.dest));
 });

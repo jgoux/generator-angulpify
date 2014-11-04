@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var env = require('../env');
+var env = require('../utilities').env;
 var rev = require('gulp-rev');
 var gulpif = require('gulp-if');
 var gutil = require('gulp-util');

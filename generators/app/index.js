@@ -61,7 +61,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
     ];
 
     this.prompt(prompts, function (answers) {
-      this.project = answers.project;
+      this.project = answers.project.trim().replace(/\s+/g, '-').toLowerCase();
       this.scripts = answers.scripts;
       this.styles = answers.styles;
       this.templates = answers.templates;
@@ -97,7 +97,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       this.directory(path.join('gulp/tasks/styles', this.styles.name), 'gulp/tasks');
       this.directory(path.join('gulp/tasks/templates', this.templates.name), 'gulp/tasks');
       this.copy('gulp/config.js', 'gulp/config.js');
-      this.copy('gulp/env.js', 'gulp/env.js');
+      this.copy('gulp/utilities.js', 'gulp/utilities.js');
     },
     writeBower: function () {
       this.copy('_bower.json', 'bower.json');

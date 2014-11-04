@@ -2,5 +2,5 @@
 module.exports =
 
 angular
-  .module('app.layout', [])
+  .module('<%=project%>.layout', [])
   .config(require('./layout.config.js'));

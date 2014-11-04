@@ -2,6 +2,6 @@
 module.exports =
 
 angular
-  .module('app.welcome', [])
+  .module('<%=project%>.welcome', [])
   .config(require('./welcome.config.js'))
   .controller('welcome', require('./welcome.controller.js'));

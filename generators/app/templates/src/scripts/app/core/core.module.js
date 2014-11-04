@@ -2,7 +2,7 @@
 module.exports =
 
 angular
-  .module('app.core', [
+  .module('<%=project%>.core', [
     'ui.router',
     require('../../../../.tmp/config').name,
     require('../../../../.tmp/templates').name

@@ -1,7 +1,7 @@
 'use strict';
 
 var path = require('path');
-var env = require('./env');
+var utilities = require('./utilities');
 
 // Folders & files names
 var src = './src';
@@ -11,7 +11,7 @@ var src = './src';
     var scripts_app = 'app';
       var scripts_app_entry = 'app.module<%=scripts.extensions%>';
       var scripts_app_vendors = 'vendors<%=scripts.extensions%>';
-    var scripts_config = env.getEnv() + '.config.json';
+    var scripts_config = utilities.config.getFile() || (utilities.env.getEnv() + '.config.json');
     var scripts_index = 'index<%=templates.extensions%>';
     var scripts_app_output = 'app.js';
     var scripts_app_output_partial = 'app*';
@@ -23,12 +23,12 @@ var src = './src';
 var build = './build';
 var dist = './dist';
 var tmp = './.tmp';
-  var tmp_config_module = 'app.config';
+  var tmp_config_module = '<%=project%>.config';
   var tmp_config_output = 'config';
-  var tmp_templates_module = 'app.templates';
+  var tmp_templates_module = '<%=project%>.templates';
   var tmp_templates_output = 'templates.js';
 
-var dest = env.isDev() ? build : dist;
+var dest = utilities.env.isDev() ? build : dist;
 
 // Configuration for each task
 var configuration = {
@@ -71,21 +71,22 @@ var configuration = {
     },
     ngConstant: {
       name: tmp_config_module,
+      constants: utilities.config.getConstants(),
       wrap: 'commonjs'
     },
     dest: tmp
   },
   index: {
     src: path.join(src, scripts, scripts_index),
-    injectSrc: [
+      injectSrc: [
       path.join(dest, scripts_vendors_output_partial + '.js'),
       path.join(dest, scripts_app_output_partial + '.{css,js}')
     ],
-    inject: {
+      inject: {
       ignorePath: path.join(dest),
-      addRootSlash: false
+        addRootSlash: false
     },
-    jade: {},
+    <% if (isHtml()) { %>minifyHTML<% } else if (isJade()) { %>jade<% } %>: {},
     dest: dest
   },
   lint: {
@@ -98,43 +99,19 @@ var configuration = {
     }
   },
   styles: {
-  <% if (isSass()) { %>
-    cssFilter: '**/*.css',
     src: path.join(src, styles, styles_main),
     rename: {basename: styles_output},
     autoprefixer: {browsers: ['last 2 versions']},
-    sass: {
+    <% if (isSass()) { %>sass: {
       sourcemap: 'none',
       //sourcemapPath: path.join('..', src, styles),
       style: 'compressed'
-    },
+    },<% } else if (isLess()) { %>less: {},<% } %>
     dest: dest
-  <% } else if (isLess()) { %>
-    src: path.join(src, styles, styles_main),
-    rename: {basename: styles_output},
-    autoprefixer: {browsers: ['last 2 versions']},
-    less: {},
-    dest: dest
-  <% } %>
   },
   templates: {
-  <% if (isHtml()) { %>
     src: path.join(src, scripts, scripts_app, '**/*<%=templates.extensions%>'),
-    templateCache: {
-      filename: tmp_templates_output,
-      options: {
-        moduleSystem: 'Browserify',
-        standalone: true,
-        module: tmp_templates_module,
-        base: function (file) {
-          return path.basename(file.relative);
-        }
-      }
-    },
-    dest: tmp
-  <% } else if (isJade()) { %>
-    src: path.join(src, scripts, scripts_app, '**/*<%=templates.extensions%>'),
-      jade: {},
+    <% if (isHtml()) { %>minifyHTML<% } else if (isJade()) { %>jade<% } %>: {},
     templateCache: {
       filename: tmp_templates_output,
         options: {
@@ -147,7 +124,6 @@ var configuration = {
       }
     },
     dest: tmp
-  <% } %>
   },
   watch: {
     lint: path.join(src, scripts, scripts_app, '**/*<%=scripts.extensions%>'),
