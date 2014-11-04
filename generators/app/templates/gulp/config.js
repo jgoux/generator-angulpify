@@ -9,16 +9,16 @@ var src = './src';
     var assets_images = 'images';
   var scripts = 'scripts';
     var scripts_app = 'app';
-      var scripts_app_entry = 'app.module.js';
+      var scripts_app_entry = 'app.module<%=scripts.extensions%>';
+      var scripts_app_vendors = 'vendors<%=scripts.extensions%>';
     var scripts_config = env.getEnv() + '.config.json';
-    var scripts_index = 'index.jade';
-    var scripts_vendors = 'vendors.js';
+    var scripts_index = 'index<%=templates.extensions%>';
     var scripts_app_output = 'app.js';
     var scripts_app_output_partial = 'app*';
     var scripts_vendors_output = 'vendors.js';
     var scripts_vendors_output_partial = 'vendors*';
   var styles = 'styles';
-    var styles_main = 'main.scss';
+    var styles_main = 'main<%=styles.extensions%>';
     var styles_output = 'app';
 var build = './build';
 var dist = './dist';
@@ -52,7 +52,7 @@ var configuration = {
     vendors: {
       browserify: {
         cache: {}, packageCache: {}, fullPaths: true,
-        entries: ['./' + path.join(src, scripts, scripts_vendors)]
+        entries: ['./' + path.join(src, scripts, scripts_app, scripts_app_vendors)]
       },
       output: scripts_vendors_output,
       dest: dest
@@ -85,10 +85,11 @@ var configuration = {
       ignorePath: path.join(dest),
       addRootSlash: false
     },
+    jade: {},
     dest: dest
   },
   lint: {
-    src: path.join(src, '**/*.js')
+    src: path.join(src, '**/*<%=scripts.extensions%>')
   },
   serve: {
     browserSync: {
@@ -97,18 +98,28 @@ var configuration = {
     }
   },
   styles: {
+  <% if (isSass()) { %>
     cssFilter: '**/*.css',
     src: path.join(src, styles, styles_main),
     rename: {basename: styles_output},
+    autoprefixer: {browsers: ['last 2 versions']},
     sass: {
-      sourcemap: env.isDev() ? 'auto' : 'none',
-      sourcemapPath: path.join('..', src, styles),
+      sourcemap: 'none',
+      //sourcemapPath: path.join('..', src, styles),
       style: 'compressed'
     },
     dest: dest
+  <% } else if (isLess()) { %>
+    src: path.join(src, styles, styles_main),
+    rename: {basename: styles_output},
+    autoprefixer: {browsers: ['last 2 versions']},
+    less: {},
+    dest: dest
+  <% } %>
   },
   templates: {
-    src: path.join(src, scripts, scripts_app, '**/*.jade'),
+  <% if (isHtml()) { %>
+    src: path.join(src, scripts, scripts_app, '**/*<%=templates.extensions%>'),
     templateCache: {
       filename: tmp_templates_output,
       options: {
@@ -121,13 +132,29 @@ var configuration = {
       }
     },
     dest: tmp
+  <% } else if (isJade()) { %>
+    src: path.join(src, scripts, scripts_app, '**/*<%=templates.extensions%>'),
+      jade: {},
+    templateCache: {
+      filename: tmp_templates_output,
+        options: {
+        moduleSystem: 'Browserify',
+          standalone: true,
+          module: tmp_templates_module,
+          base: function (file) {
+          return path.basename(file.relative);
+        }
+      }
+    },
+    dest: tmp
+  <% } %>
   },
   watch: {
-    lint: path.join(src, scripts, scripts_app, '**/*.js'),
+    lint: path.join(src, scripts, scripts_app, '**/*<%=scripts.extensions%>'),
     index: path.join(src, scripts, scripts_index),
     config: path.join(src, scripts, scripts_config),
-    templates: path.join(src, scripts, scripts_app, '**/*.jade'),
-    styles: path.join(src, styles, '**/*.{sass,scss}'),
+    templates: path.join(src, scripts, scripts_app, '**/*<%=templates.extensions%>'),
+    styles: path.join(src, styles, '**/*<%=styles.extensions%>'),
     styles_output: styles_output + '.min.css',
     reload: path.join(dest, '**/*.{js,html}')
   }

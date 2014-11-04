@@ -24,12 +24,14 @@ gulp.task('watch', function () {
   });
 
   watch(config.styles, function(files, cb) {
-    gulp.start(['styles'], function() {
-      browserSync.reload(config.styles_output)
+    gulp.start('styles', function() {
+      browserSync.reload(config.styles_output);
+      cb();
     });
   });
 
-  watch(config.reload, function() {
+  watch(config.reload, function(files, cb) {
     browserSync.reload();
+    cb();
   });
 });

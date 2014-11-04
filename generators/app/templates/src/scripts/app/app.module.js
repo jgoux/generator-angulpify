@@ -2,8 +2,8 @@
 
 angular
   .module('app', [
-    require('./core/core.module').name,
-    require('./welcome/welcome.module').name,
-    require('./layout/layout.module').name
+    require('./core/core.module.js').name,
+    require('./welcome/welcome.module.js').name,
+    require('./layout/layout.module.js').name
   ])
-  .config(require('./app.config'));
+  .config(require('./app.config.js'));

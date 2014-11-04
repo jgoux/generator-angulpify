@@ -3,5 +3,5 @@ module.exports =
 
 angular
   .module('app.welcome', [])
-  .config(require('./welcome.config'))
-  .controller('welcome', require('./welcome.controller'));
+  .config(require('./welcome.config.js'))
+  .controller('welcome', require('./welcome.controller.js'));

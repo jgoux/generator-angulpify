@@ -5,24 +5,24 @@ var env = require('../env');
 var rev = require('gulp-rev');
 var gulpif = require('gulp-if');
 var csso = require('gulp-csso');
-var filter = require('gulp-filter');
+var less = require('gulp-less');
 var rename = require('gulp-rename');
-var sass = require('gulp-ruby-sass');
+var plumber = require('gulp-plumber');
+//var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 
 var config = require('../config').styles;
 
 gulp.task('styles', function () {
-  var cssFilter = filter(config.cssFilter);
-
   return gulp.src(config.src)
-    .pipe(sass(config.sass))
-    .pipe(cssFilter)
-    .pipe(autoprefixer('last 1 version'))
-    .pipe(csso())
-    .pipe(cssFilter.restore())
+    .pipe(plumber())
     .pipe(rename(config.rename))
-    .pipe(gulpif(env.isProd(), rev()))
     .pipe(rename({suffix: '.min'}))
+    //.pipe(gulpif(env.isProd(), sourcemaps.init()))
+    .pipe(less(config.less))
+    .pipe(autoprefixer(config.autoprefixer))
+    .pipe(csso())
+    //.pipe(gulpif(env.isProd(), sourcemaps.write('./')))
+    .pipe(gulpif(env.isProd(), rev()))
     .pipe(gulp.dest(config.dest));
 });

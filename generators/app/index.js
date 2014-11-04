@@ -34,23 +34,27 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
         default: this.appname
       },
       {
-        type: 'list', name: 'script', message: 'Would you like to use a language other than JavaScript?',
+        type: 'list', name: 'scripts', message: 'Would you like to use a language other than JavaScript?',
         choices: [
-          {name: 'JavaScript is all I need', value: 'js'}
+          /*{name: 'TypeScript', value: {name: 'ts', extensions: '.ts'}},*/
+          {name: 'Nop, JavaScript please.', value: {name: 'js', extensions: '.js'}}
         ],
         default: 0
       },
       {
-        type: 'list', name: 'style', message: 'Would you like to use a preprocessor?',
+        type: 'list', name: 'styles', message: 'Would you like to use a preprocessor?',
         choices: [
-          {name: 'Sass', value: 'scss'}
+          {name: 'Less', value: {name: 'less', extensions: '.less'}},
+          {name: 'Sass', value: {name: 'sass', extensions: '.{sass,scss}'}},
+          {name: 'Nop, CSS please.', value: {name: 'css', extensions: '.css'}},
         ],
         default: 0
       },
       {
-        type: 'list', name: 'template', message: 'Would you like to use a template engine?',
+        type: 'list', name: 'templates', message: 'Would you like to use a template engine?',
         choices: [
-          {name: 'Jade', value: 'jade'}
+          {name: 'Jade', value: {name: 'jade', extensions: '.jade'}},
+          {name: 'Nop. HTML please.', value: {name: 'html', extensions: '.html'}}
         ],
         default: 0
       }
@@ -58,18 +62,28 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
 
     this.prompt(prompts, function (answers) {
       this.project = answers.project;
-      this.script = answers.script;
-      this.style = answers.style;
-      this.template = answers.template;
+      this.scripts = answers.scripts;
+      this.styles = answers.styles;
+      this.templates = answers.templates;
       done();
     }.bind(this));
   },
   configuring: function () {
+    // Scripts
+    this.isJs = function () { return this.scripts.name === 'js' };
+    this.isTs = function () { return this.scripts.name === 'ts' };
+    // Styles
+    this.isSass = function () { return this.styles.name === 'sass' };
+    this.isLess = function () { return this.styles.name === 'less' };
+    // Templates
+    this.isHtml = function () { return this.templates.name === 'html' };
+    this.isJade = function () { return this.templates.name === 'jade' };
+
     this.config.set({
       project: this.project,
-      script: this.script,
-      style: this.style,
-      template: this.template
+      scripts: this.scripts,
+      styles: this.styles,
+      templates: this.templates
     });
     this.copy('editorconfig', '.editorconfig');
     this.copy('jshintrc', '.jshintrc');
@@ -78,7 +92,12 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
   writing: {
     writeGulp: function () {
       this.copy('_gulpfile.js', 'gulpfile.js');
-      this.directory('gulp', 'gulp');
+      this.directory('gulp/tasks/shared', 'gulp/tasks');
+      this.directory(path.join('gulp/tasks/scripts', this.scripts.name), 'gulp/tasks');
+      this.directory(path.join('gulp/tasks/styles', this.styles.name), 'gulp/tasks');
+      this.directory(path.join('gulp/tasks/templates', this.templates.name), 'gulp/tasks');
+      this.copy('gulp/config.js', 'gulp/config.js');
+      this.copy('gulp/env.js', 'gulp/env.js');
     },
     writeBower: function () {
       this.copy('_bower.json', 'bower.json');
@@ -93,13 +112,13 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       copyFromGlob(this, 'src/**/*.config.json');
     },
     writeScripts: function () {
-      copyFromGlob(this, 'src/**/*.'+this.script);
+      copyFromGlob(this, 'src/**/*'+this.scripts.extensions);
     },
     writeStyles: function () {
-      copyFromGlob(this, 'src/**/*.'+this.style);
+      copyFromGlob(this, 'src/**/*'+this.styles.extensions);
     },
     writeTemplates: function () {
-      copyFromGlob(this, 'src/**/*.'+this.template);
+      copyFromGlob(this, 'src/**/*'+this.templates.extensions);
     }
   },
   install: function () {
