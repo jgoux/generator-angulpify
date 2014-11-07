@@ -86,7 +86,7 @@ var configuration = {
       ignorePath: path.join(dest),
         addRootSlash: false
     },
-    <% if (isHtml()) { %>minifyHTML<% } else if (isJade()) { %>jade<% } %>: {},
+    <% if (isHtml()) { %>minifyHtml<% } else if (isJade()) { %>jade<% } %>: {},
     dest: dest
   },
   lint: {
@@ -100,7 +100,7 @@ var configuration = {
   },
   styles: {
     src: path.join(src, styles, styles_main),
-    rename: {basename: styles_output},
+    basename: styles_output,
     autoprefixer: {browsers: ['last 2 versions']},
     <% if (isSass()) { %>sass: {
       sourcemap: 'none',

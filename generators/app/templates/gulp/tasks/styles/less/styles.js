@@ -16,7 +16,7 @@ var config = require('../config').styles;
 gulp.task('styles', function () {
   return gulp.src(config.src)
     .pipe(plumber())
-    .pipe(rename(config.rename))
+    .pipe(rename({basename: config.basename}))
     .pipe(gulpif(env.isProd(), rev()))
     .pipe(rename({suffix: '.min'}))
     //.pipe(gulpif(env.isDev(), sourcemaps.init()))

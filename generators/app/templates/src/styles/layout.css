@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f2f2f2;
+}
+
+header {
+  margin-bottom: 50px;
+}
+
+header h1 {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 5em;
+  margin-bottom: 1em;
+  line-height: 0.5em;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.blue {
+  color: #3c6991;
+}
+
+.red {
+  color: #e52a3a;
+}
+
+.bubble-speech {
+  vertical-align: top;
+  margin-left: -80px;
+  display: inline-block;
+  position: relative;
+  background-color: white;
+  padding: 16px;
+  box-shadow: -4px 0 0 0 black, 4px 0 0 0 black, 0 4px 0 0 black, 0 -4px 0 0 black;
+}
+
+.bubble-speech.bubble-left:after{
+  display: block;
+  content: "";
+  position:absolute;
+  bottom:-14px;
+  left: 0;
+  border-top: 0 black solid;
+  border-bottom: 12px transparent solid;
+  border-left: 20px  black solid;
+}
+
+.bubble-speech h2 {
+  font-weight:bold;
+  margin:0;
+  padding: 0 12px 2px 0;
+}
+

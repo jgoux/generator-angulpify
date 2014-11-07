@@ -36,7 +36,6 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
       {
         type: 'list', name: 'scripts', message: 'Would you like to use a language other than JavaScript?',
         choices: [
-          /*{name: 'TypeScript', value: {name: 'ts', extensions: '.ts'}},*/
           {name: 'Nop, JavaScript please.', value: {name: 'js', extensions: '.js'}}
         ],
         default: 0
@@ -70,14 +69,14 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
   },
   configuring: function () {
     // Scripts
-    this.isJs = function () { return this.scripts.name === 'js' };
-    this.isTs = function () { return this.scripts.name === 'ts' };
+    this.isJs = function () { return this.scripts.name === 'js'; };
     // Styles
-    this.isSass = function () { return this.styles.name === 'sass' };
-    this.isLess = function () { return this.styles.name === 'less' };
+    this.isCss = function () { return this.styles.name === 'css'; };
+    this.isSass = function () { return this.styles.name === 'sass'; };
+    this.isLess = function () { return this.styles.name === 'less'; };
     // Templates
-    this.isHtml = function () { return this.templates.name === 'html' };
-    this.isJade = function () { return this.templates.name === 'jade' };
+    this.isHtml = function () { return this.templates.name === 'html'; };
+    this.isJade = function () { return this.templates.name === 'jade'; };
 
     this.config.set({
       project: this.project,
