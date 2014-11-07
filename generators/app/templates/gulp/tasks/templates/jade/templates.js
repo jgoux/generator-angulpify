@@ -2,8 +2,8 @@
 
 var gulp = require('gulp');
 var path = require('path');
-var templateCache = require('gulp-angular-templatecache');
 var jade = require('gulp-jade');
+var templateCache = require('gulp-angular-templatecache');
 
 var config = require('../config').templates;
 

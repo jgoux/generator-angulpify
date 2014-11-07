@@ -1,11 +1,11 @@
 'use strict';
 
 var gulp = require('gulp');
-var env = require('../utilities').env;
 var rev = require('gulp-rev');
 var gulpif = require('gulp-if');
 var csso = require('gulp-csso');
 var rename = require('gulp-rename');
+var env = require('../utilities').env;
 var cssimport = require("gulp-cssimport");
 //var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');

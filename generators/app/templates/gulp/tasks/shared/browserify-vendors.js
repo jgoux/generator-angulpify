@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = require('gulp');
-var env = require('../utilities').env;
 var rev = require('gulp-rev');
 var gulpif = require('gulp-if');
 var gutil = require('gulp-util');
@@ -9,6 +8,7 @@ var watchify = require('watchify');
 var rename = require('gulp-rename');
 var buffer = require('vinyl-buffer');
 var shim = require('browserify-shim');
+var env = require('../utilities').env;
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var prettyHrtime = require('pretty-hrtime');

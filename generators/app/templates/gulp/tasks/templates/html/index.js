@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var inject = require('gulp-inject');
 var minifyHtml = require('gulp-minify-html');
+
 var config = require('../config').index;
 
 gulp.task('index', function () {
