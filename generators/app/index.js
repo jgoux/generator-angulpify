@@ -47,7 +47,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
           {name: 'Sass', value: {name: 'sass', extensions: '.{sass,scss}'}},
           {name: 'Nop, CSS please.', value: {name: 'css', extensions: '.css'}},
         ],
-        default: 0
+        default: 2
       },
       {
         type: 'list', name: 'templates', message: 'Would you like to use a template engine?',
@@ -55,7 +55,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
           {name: 'Jade', value: {name: 'jade', extensions: '.jade'}},
           {name: 'Nop. HTML please.', value: {name: 'html', extensions: '.html'}}
         ],
-        default: 0
+        default: 1
       }
     ];
 
