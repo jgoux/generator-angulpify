@@ -21,7 +21,7 @@ This project is still in early stage of development, so use with caution. API br
 * Automagically compile your Jade (or HTML if you want!) templates into $templateCache
 * Awesome image optimization
 * Wire-up Bower dependencies easily with browserify-shim
-* Bundle your application for two environments (build/release)
+* Bundle your application for two environments (build/dist)
 
 *For more information on what this generator can do for you, take a look at the [gulp plugins](generators/app/templates/_package.json).*
 
@@ -32,7 +32,6 @@ This generator relies on several technologies, make sure your system has:
 - [Yeoman](http://yeoman.io/learning/index.html)
 - [Bower](http://bower.io/#install-bower)
 - [Gulp](http://gulpjs.com)
-- [LiveReload](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions)
 - [[Ruby](https://www.ruby-lang.org/en/installation/) + [Sass](http://sass-lang.com/install)] | Optional
 
 
@@ -42,8 +41,8 @@ This generator relies on several technologies, make sure your system has:
 - Run: `yo angulpify`
 - Run:
   * `gulp` for building to the `build` directory
-  * `gulp --release` for building to the `release` directory
-- Go to http://localhost:8080
+  * `gulp --env=prod` for building to the `dist` directory
+- Go to http://localhost:3000
 - Enjoy!
 
 
