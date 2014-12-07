@@ -103,8 +103,7 @@ var configuration = {
     basename: styles_output,
     autoprefixer: {browsers: ['last 2 versions']},
     <% if (isSass()) { %>sass: {
-      sourcemap: 'none',
-      //sourcemapPath: path.join('..', src, styles),
+      sourcemap: utilities.env.isDev(),
       style: 'compressed'
     },<% } else if (isLess()) { %>less: {},<% } %>
     dest: dest

@@ -44,7 +44,7 @@ var AngulpifyGenerator = module.exports = yeoman.generators.Base.extend({
         type: 'list', name: 'styles', message: 'Would you like to use a preprocessor?',
         choices: [
           {name: 'Less', value: {name: 'less', extensions: '.less'}},
-          {name: 'Sass', value: {name: 'sass', extensions: '.{sass,scss}'}},
+          {name: 'Sass', value: {name: 'sass', extensions: '.scss'}},
           {name: 'Nop, CSS please.', value: {name: 'css', extensions: '.css'}},
         ],
         default: 2

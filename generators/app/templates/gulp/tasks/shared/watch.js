@@ -7,31 +7,29 @@ var browserSync = require('browser-sync');
 var config = require('../config').watch;
 
 gulp.task('watch', function () {
-  watch(config.lint, function(files, cb) {
-    gulp.start('lint', cb);
+  watch(config.lint, function() {
+    gulp.start('lint');
   });
 
-  watch(config.index, function(files, cb) {
-    gulp.start('index', cb);
+  watch(config.index, function() {
+    gulp.start('index');
   });
 
-  watch(config.templates, function(files, cb) {
-    gulp.start('templates', cb);
+  watch(config.templates, function() {
+    gulp.start('templates');
   });
 
-  watch(config.config, function(files, cb) {
-    gulp.start('config', cb);
+  watch(config.config, function() {
+    gulp.start('config');
   });
 
-  watch(config.styles, function(files, cb) {
+  watch(config.styles, function() {
     gulp.start('styles', function() {
       browserSync.reload(config.styles_output);
-      cb();
     });
   });
 
-  watch(config.reload, function(files, cb) {
+  watch(config.reload, function() {
     browserSync.reload();
-    cb();
   });
 });
