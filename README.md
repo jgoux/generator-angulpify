@@ -5,11 +5,6 @@
 ![](http://i.imgur.com/ucUfQQz.png)
 
 
-### Notice
-
-This project is still in early stage of development, so use with caution. API breaking changes at this stage are quite likely.
-
-
 ## Features
 
 * Require() everywhere to build a modular application
