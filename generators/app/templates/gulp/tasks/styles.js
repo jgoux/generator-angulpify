@@ -17,7 +17,7 @@ function handleError(err) {
 <% } %>
 
 module.exports = gulp.task('styles', function () {
-  <% if (includeSass) { %>return sass(config.paths.src.styles, {sourcemap: !release } ).on('error', handleError)<% } else { %> return gulp.src(config.paths.src.styles) <% } %><% if (includeLess || includeSass) { %>
+  <% if (includeSass) { %>return sass(config.paths.src.styles, {sourcemap: !release } ).on('error', handleError)<% } else { %> return gulp.src(config.paths.src.styles) <% } %><% if (includeLess) { %>
     .pipe(gulpif(!release, sourcemaps.init())) <% } %><% if (includeLess) { %>
     .pipe(less().on('error', handleError))<% } %>
     .pipe(autoprefixer('last 1 version'))
