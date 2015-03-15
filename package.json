@@ -24,7 +24,7 @@
     "front-end"
   ],
   "dependencies": {
-    "chalk": "^0.5.1",
+    "chalk": "^1.0.0",
     "yeoman-generator": "^0.17.2",
     "yosay": "^1.0.0"
   },
